@@ -599,6 +599,8 @@ github.com/okex/iavl v0.14.4-0.20211012091614-0a2c4bd2676f h1:V/qG1fwKrkUqpg+sHH
 github.com/okex/iavl v0.14.4-0.20211012091614-0a2c4bd2676f/go.mod h1:vHLYxU/zuxBmxxr1v+5Vnd/JzcIsyK17n9P9RDubPVU=
 github.com/okex/iavl v0.14.4-0.20211013093440-385f62e60f00 h1:BI0Skgh2OXpsO2iYbl88GuhXsQfAfGoixomrG6x15oU=
 github.com/okex/iavl v0.14.4-0.20211013093440-385f62e60f00/go.mod h1:vHLYxU/zuxBmxxr1v+5Vnd/JzcIsyK17n9P9RDubPVU=
+github.com/okex/iavl v0.14.4-0.20211013102732-b5ba2193f693 h1:xxmVD6r3svNt1+WsMAQaadk66xrl13RlRVNZqwhSxtQ=
+github.com/okex/iavl v0.14.4-0.20211013102732-b5ba2193f693/go.mod h1:vHLYxU/zuxBmxxr1v+5Vnd/JzcIsyK17n9P9RDubPVU=
 github.com/okex/tendermint v0.33.9-okexchain6.0.20211011050721-68d67ac1d2c2 h1:bDVPfIqESX4CZ16UmNjk3Mkq45b68WShILpYgeAKrOs=
 github.com/okex/tendermint v0.33.9-okexchain6.0.20211011050721-68d67ac1d2c2/go.mod h1:M1QIvLS/pX7b7wwoLLFCGPxnPVNpiy9yNg9l/zFiMh0=
 github.com/okex/tm-db v0.5.2-exchain1 h1:c8aX7HoNW58GXHEO6e7BR81SwyBfjWJkqGwNUhF3tlc=
