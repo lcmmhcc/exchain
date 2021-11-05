@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/hex"
 	"fmt"
 	"io"
 	"log"
@@ -9,9 +10,8 @@ import (
 	"github.com/okex/exchain/libs/cosmos-sdk/store/rootmulti"
 	"github.com/spf13/viper"
 
-	"github.com/okex/exchain/libs/cosmos-sdk/server"
 	"github.com/okex/exchain/app"
-	"github.com/spf13/cobra"
+	"github.com/okex/exchain/libs/cosmos-sdk/server"
 	"github.com/okex/exchain/libs/iavl"
 	tmlog "github.com/okex/exchain/libs/tendermint/libs/log"
 	"github.com/okex/exchain/libs/tendermint/mock"
@@ -20,12 +20,43 @@ import (
 	sm "github.com/okex/exchain/libs/tendermint/state"
 	"github.com/okex/exchain/libs/tendermint/store"
 	"github.com/okex/exchain/libs/tendermint/types"
+	"github.com/spf13/cobra"
 	dbm "github.com/tendermint/tm-db"
 )
 
 const (
 	FlagStartHeight string = "start-height"
 )
+
+func getL(ctx *server.Context) {
+	rootDir := ctx.Config.RootDir
+	dataDir := filepath.Join(rootDir, "data")
+	stateStoreDB, err := openDB(stateDB, dataDir)
+	panicError(err)
+
+	startHeight := viper.GetInt64(FlagStartHeight)
+	abcis, err := sm.LoadABCIResponses(stateStoreDB, startHeight)
+	panicError(err)
+	fmt.Println("abic", startHeight, hex.EncodeToString(abcis.ResultsHash()))
+	for i, v := range abcis.DeliverTxs {
+		fmt.Println("i", i, v.Code, v.Log)
+	}
+}
+func lastResult(ctx *server.Context) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "abci-res",
+		Short: "",
+		Run: func(cmd *cobra.Command, args []string) {
+			log.Println("--------- repair data start ---------")
+
+			getL(ctx)
+			log.Println("--------- repair data success ---------")
+		},
+	}
+	cmd.Flags().Bool(sm.FlagParalleledTx, false, "parallel execution for evm txs")
+	cmd.Flags().Int64(FlagStartHeight, 0, "Set the start block height for repair")
+	return cmd
+}
 
 func repairStateCmd(ctx *server.Context) *cobra.Command {
 	cmd := &cobra.Command{
