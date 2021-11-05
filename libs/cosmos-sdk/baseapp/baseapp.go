@@ -848,8 +848,7 @@ func (app *BaseApp) runTx(mode runTxMode, txBytes []byte, tx sdk.Tx, height int6
 		}
 
 		if err != nil {
-			ctx = ctx.WithBlockGasMeter(sdk.NewInfiniteGasMeter())
-			startingGas = 0
+			ctx = ctx.WithGasMeter(sdk.NewInfiniteGasMeter())
 			return gInfo, nil, nil, err
 		}
 
