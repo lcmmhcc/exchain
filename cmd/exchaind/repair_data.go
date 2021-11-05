@@ -39,7 +39,7 @@ func getL(ctx *server.Context) {
 	panicError(err)
 	fmt.Println("abic", startHeight, hex.EncodeToString(abcis.ResultsHash()))
 	for i, v := range abcis.DeliverTxs {
-		fmt.Println("i", i, v.Code, v.Log)
+		fmt.Println("i", i, v.Code, hex.EncodeToString(v.Data), v.Log)
 	}
 }
 func lastResult(ctx *server.Context) *cobra.Command {
