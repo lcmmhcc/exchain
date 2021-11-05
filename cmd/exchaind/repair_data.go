@@ -55,6 +55,7 @@ func lastResult(ctx *server.Context) *cobra.Command {
 	}
 	cmd.Flags().Bool(sm.FlagParalleledTx, false, "parallel execution for evm txs")
 	cmd.Flags().Int64(FlagStartHeight, 0, "Set the start block height for repair")
+	cmd.PersistentFlags().String(flagDBBackend, "goleveldb", "Database backend: goleveldb | rocksdb")
 	return cmd
 }
 
@@ -165,6 +166,7 @@ func doRepair(ctx *server.Context, state sm.State, stateStoreDB dbm.DB,
 		repairedAppHash := res.LastBlockAppHash
 		log.Println("Repaired block height", repairedBlockHeight)
 		log.Println("Repaired app hash", fmt.Sprintf("%X", repairedAppHash))
+		log.Println("Repaired app hash", fmt.Sprintf("%X", state.LastResultsHash))
 	}
 }
 
