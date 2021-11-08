@@ -230,7 +230,6 @@ func doReplay(ctx *server.Context, state sm.State, stateStoreDB dbm.DB,
 	originBlockStoreDB, err := openDB(blockStoreDB, originDataDir)
 	panicError(err)
 	originBlockStore := store.NewBlockStore(originBlockStoreDB)
-
 	originLatestBlockHeight := originBlockStore.Height()
 	log.Println("origin latest block height", "height", originLatestBlockHeight)
 
